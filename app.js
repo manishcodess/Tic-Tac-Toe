@@ -38,9 +38,11 @@ const printer = (event)=>{
     // if board is empty (no x to o vice versa)
     if(board_array[element.id]==="E") {
       total_turn++;
+      element.classList.add("taken");
 
       if(turn==='O'){
         element.innerHTML = "O";
+        element.classList.add("o-color");
         board_array[Number(element.id)] = "O";
         turn = "X";
 
@@ -59,6 +61,7 @@ const printer = (event)=>{
         
     else{
         element.innerHTML = "X";
+        element.classList.add("x-color");
         board_array[element.id] = "X";
         turn = "O";
 
@@ -99,6 +102,7 @@ const Restart = document.getElementById("restartButton");
   console.log(cell);
   cell.forEach((value) => {//we used for each not map
     value.innerHTML = ""; // Clear the content of each cell
+    value.classList.remove("taken", "x-color", "o-color");
   });
 
 
