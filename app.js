@@ -1,7 +1,7 @@
 let turn = 'O';
 let total_turn = 0;
 
-
+//👉 addEventListener and removeEventListener need the function itself, not the function call.
 let winner = [
     [0,1,2],[3,4,5],[6,7,8],
     [0,3,6],[1,4,7],[2,5,8],
@@ -16,7 +16,7 @@ let board_array = new Array(9).fill("E");
 function checkWinner(){
    
     for(let [index0,index1,index2] of winner)
-    {
+    { // o==0 &&0==0      ya fir x==x && x==x
         if(board_array[index0]!="E"&&board_array[index0]===board_array[index1]&&board_array[index1]===board_array[index2])
             return 1;
     }
@@ -50,6 +50,7 @@ const printer = (event)=>{
         {
             document.getElementById('winningMessage').innerHTML = "Winner is O";
             board.removeEventListener('click',printer);
+            //so cant play after someone win remove add eventlistener
             return;
         }
         
@@ -95,7 +96,7 @@ const Restart = document.getElementById("restartButton");
  // });
  Restart.addEventListener('click', () => {
   const cell = document.querySelectorAll('.cell') // Get all game cells
- 
+  console.log(cell);
   cell.forEach((value) => {//we used for each not map
     value.innerHTML = ""; // Clear the content of each cell
   });
@@ -108,10 +109,8 @@ const Restart = document.getElementById("restartButton");
   total_turn = 0; // Reset the turn counter
   board_array = new Array(9).fill("E"); // Empty board array ("E" = empty maybe)
   document.getElementById('winningMessage').innerHTML = ""; // Clear win message
-
+// In your code, when someone wins (or it’s a draw), you do this:
+// board.removeEventListener('click', printer); to stop further moves.
   board.addEventListener('click', printer); // Enable clicking again on the board
 });//restart evn
 
-
-// Homework Project: Rock paper scissor
-console.log("mna")
